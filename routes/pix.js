@@ -1,9 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const {Pix} = require("../models/index");
-const authenticateToken = require('../middlewares/auth')
-
-const JWT_SECRET = process.env.APP_KEY;
+const {Pix, User} = require("../models/index");
+const authenticateToken = require('../middlewares/auth');
 
 // Create a new user
 router.post("/store", async (req, res) => {
@@ -18,13 +16,22 @@ router.post("/store", async (req, res) => {
 
 
 
-router.get("/",authenticateToken,  async (req, res) => {
+router.get("/",  async (req, res) => {
   try {
-    const user = await User.findAll();
-    res.json(user);
+    const pix = await Pix.findAll({
+      include: [{
+        model: User,
+        as: "clients",
+        attributes: ['name', 'cpf']
+      }
+    ]   
+    })
+    res.json(pix);
   } catch (error) {
-    res.status(500).json({ message: "Failed User not found." });
+    res.status(500).json({ message: "Failed Pix not found." });
   }
 });
+
+
 
 module.exports = router;

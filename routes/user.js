@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const {User, Pixe} = require("../models/index");
+const { User, Pix } = require("../models/index");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const authenticateToken = require('../middlewares/auth')
+const authenticateToken = require("../middlewares/auth");
 
 const JWT_SECRET = process.env.APP_KEY;
 
@@ -13,7 +13,7 @@ router.post("/store", async (req, res) => {
     const user = await User.create(req.body);
     res.json(user);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({ message: "Failed to create user." });
   }
 });
@@ -40,17 +40,17 @@ router.post("/login", async (req, res) => {
 
     res.json({ token });
   } catch (error) {
-    res.status(500).json({ message: 'Login failed' });
+    res.status(500).json({ message: "Login failed" });
   }
 });
 
-router.get("/",  async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const user = await User.findAll({
       include: {
-        model: Pixe,
-        as: 'pixs'
-      }
+        model: Pix,
+        as: "pixs",
+      },
     });
     res.json(user);
   } catch (error) {
@@ -58,4 +58,24 @@ router.get("/",  async (req, res) => {
   }
 });
 
+router.get("/show/pix/:id", async (req, res) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    const pixsUser = await Pix.findAll({
+      where: { clientId: user.id },
+    });
+    if (pixsUser === null) {
+      return res.status(404).json({ message: "PixsUser not found." });
+    }
+    res.json(pixsUser);
+  } catch (error) {
+    res.status(500).json({ message: "Failed User not found." });
+  }
+});
+
 module.exports = router;
+
