@@ -69,9 +69,7 @@
             }
           }
         }
-      }
-    },
-    "/users/store": {
+      },
       "post": {
         "summary": "Create a new user",
         "requestBody": {
@@ -98,10 +96,10 @@
         }
       }
     },
-
-    "/pix/store": {
+    "/users/pix": {
       "post": {
         "summary": "Create a new pix",
+
         "requestBody": {
           "required": true,
           "content": {
@@ -112,7 +110,15 @@
             }
           }
         },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
           "200": {
             "description": "The newly created pix",
             "content": {
@@ -126,11 +132,9 @@
         }
       }
     },
-
-
-    "/users/{id}": {
+    "/users/pix/{id}": {
       "get": {
-        "summary": "Get user by ID",
+        "summary": "Get pix for user id",
         "parameters": [
           {
             "name": "id",
@@ -141,69 +145,24 @@
             }
           }
         ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
           "200": {
-            "description": "The user",
+            "description": "The Pix",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
+                  "$ref": "#/components/schemas/Pix"
                 }
               }
             }
-          }
-        }
-      },
-      "put": {
-        "summary": "Update user by ID",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The updated user",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete user by ID",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "User deleted successfully"
           }
         }
       }

@@ -3,7 +3,7 @@ const router = express.Router();
 const {Pix, User} = require("../models/index");
 const authenticateToken = require('../middlewares/auth');
 
-// Create a new user
+// Create a new pix
 router.post("/store", async (req, res) => {
   try {
     const pix = await Pix.create(req.body);

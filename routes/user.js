@@ -7,8 +7,20 @@ const authenticateToken = require("../middlewares/auth");
 
 const JWT_SECRET = process.env.APP_KEY;
 
+
+// Create a new pix
+router.post("/pix", authenticateToken, async (req, res) => {
+  try {
+    const pix = await Pix.create(req.body);
+    res.json(pix);
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: "Failed to create pix." });
+  }
+});
+
 // Create a new user
-router.post("/store", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const user = await User.create(req.body);
     res.json(user);
@@ -44,6 +56,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
+/*
 router.get("/", async (req, res) => {
   try {
     const user = await User.findAll({
@@ -57,8 +70,9 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: "Failed User not found." });
   }
 });
+*/
 
-router.get("/show/pix/:id", async (req, res) => {
+router.get("/pix/:id", authenticateToken, async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id);
     if (!user) {
@@ -68,12 +82,12 @@ router.get("/show/pix/:id", async (req, res) => {
     const pixsUser = await Pix.findAll({
       where: { clientId: user.id },
     });
-    if (pixsUser === null) {
-      return res.status(404).json({ message: "PixsUser not found." });
+    if (pixsUser.length === 0) {
+      return res.status(404).json({ message: "User Pix not found." });
     }
     res.json(pixsUser);
   } catch (error) {
-    res.status(500).json({ message: "Failed User not found." });
+    res.status(500).json({ message: "Error: " + error.message });
   }
 });
 

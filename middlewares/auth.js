@@ -9,7 +9,7 @@ function authenticateToken(req, res, next) {
   const token = authHeader && authHeader.split(" ")[1];
 
   if (!token) {
-    return res.status(403).json({ message: "Acesso negado: nenhum token" });
+    return res.status(403).json({ message: "Acesso negado: não autorizado" });
   }
 
   jwt.verify(token, JWT_SECRET, (error, user) => {
