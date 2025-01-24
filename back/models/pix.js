@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Pix.init({
     clientId: DataTypes.INTEGER,
-    pix_key: DataTypes.STRING
+    pix_key: DataTypes.STRING,
+    amount: DataTypes.FLOAT
   }, {
     sequelize,
     modelName: 'Pix',

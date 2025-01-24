@@ -197,6 +197,9 @@
           },
           "pix_key": {
             "type": "string"
+          },
+          "amount": {
+            "type": "number"
           }
         }
       },

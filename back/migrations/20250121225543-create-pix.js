@@ -19,7 +19,10 @@ module.exports = {
       },
       pix_key: {
         type: Sequelize.STRING,
-        unique: true,
+        allowNull: false,
+      },
+      amount: {
+        type: Sequelize.FLOAT,
         allowNull: false,
       },
       createdAt: {
