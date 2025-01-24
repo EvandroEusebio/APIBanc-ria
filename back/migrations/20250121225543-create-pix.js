@@ -21,9 +21,17 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      description: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       amount: {
         type: Sequelize.FLOAT,
         allowNull: false,
+      },
+      destination: {
+        type: Sequelize.ENUM(['to_client', 'to_enterprise']),
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

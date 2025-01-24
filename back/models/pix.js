@@ -20,7 +20,9 @@ module.exports = (sequelize, DataTypes) => {
   Pix.init({
     clientId: DataTypes.INTEGER,
     pix_key: DataTypes.STRING,
-    amount: DataTypes.FLOAT
+    description: DataTypes.STRING,
+    destination: DataTypes.ENUM(['to_client', 'to_enterprise']),
+    amount: DataTypes.FLOAT,
   }, {
     sequelize,
     modelName: 'Pix',

@@ -110,15 +110,8 @@
             }
           }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
         "responses": {
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          },
+          
           "200": {
             "description": "The newly created pix",
             "content": {
@@ -135,6 +128,76 @@
     "/users/pix/{id}": {
       "get": {
         "summary": "Get pix for user id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "200": {
+            "description": "The Pix",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pix"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/pix/receive/{id}": {
+      "get": {
+        "summary": "Get receive pix for user id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "200": {
+            "description": "The Pix",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pix"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/pix/send/{id}": {
+      "get": {
+        "summary": "Get send pix for user id",
         "parameters": [
           {
             "name": "id",
@@ -196,6 +259,12 @@
             "type": "string"
           },
           "pix_key": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          },
+          "description": {
             "type": "string"
           },
           "amount": {

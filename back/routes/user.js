@@ -7,14 +7,29 @@ const authenticateToken = require("../middlewares/auth");
 
 const JWT_SECRET = process.env.APP_KEY;
 
-
 // Create a new pix
-router.post("/pix", authenticateToken, async (req, res) => {
+router.post("/pix", async (req, res) => {
   try {
+    const { pix_key, destination, clientId } = req.body;
+
+    // verify if clientId is exist
+    const isClient = await User.findByPk(clientId);
+    if (!isClient) {
+      return res.status(404).json({ message: "Client not found." });
+    }
+
+    // verify pix to enterpriese or to client
+    if (destination === "to_enterprise" && pix_key !== "123") {
+      return res.status(400).json({ message: "Incorrect Pix Key" });
+    } else if (destination === "to_client" && pix_key !== isClient.cpf) {
+      return res.status(400).json({ message: "Incorrect Pix Key" });
+    }
+
+    // create pix
     const pix = await Pix.create(req.body);
-    res.json(pix);
+    return res.json(pix);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({ message: "Failed to create pix." });
   }
 });
@@ -26,7 +41,7 @@ router.post("/", async (req, res) => {
     res.json(user);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Failed to create user." });
+    res.status(500).json({ message: "Failed to create Client." });
   }
 });
 
@@ -35,15 +50,15 @@ router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ where: { cpf } });
     if (!user) {
-      return res.status(400).json({ message: "User not found" });
+      return res.status(400).json({ message: "Client not found" });
     }
 
-    // Verifica se a senha fornecida é válida
+    // Verify if password is valid
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
-    // Cria um token JWT
+    // Create an token JWT
     const token = jwt.sign(
       { userId: user.id, username: user.name },
       JWT_SECRET,
@@ -76,14 +91,14 @@ router.get("/pix/:id", authenticateToken, async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id);
     if (!user) {
-      return res.status(404).json({ message: "User not found." });
+      return res.status(404).json({ message: "Client not found." });
     }
 
     const pixsUser = await Pix.findAll({
       where: { clientId: user.id },
     });
     if (pixsUser.length === 0) {
-      return res.status(404).json({ message: "User Pix not found." });
+      return res.status(404).json({ message: "Client Pix not found." });
     }
     res.json(pixsUser);
   } catch (error) {
@@ -91,5 +106,38 @@ router.get("/pix/:id", authenticateToken, async (req, res) => {
   }
 });
 
-module.exports = router;
 
+// get received user pix
+router.get("/pix/receive/:id", authenticateToken, async (req, res) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: "Client not found." });
+    }
+    const pixsUser = await Pix.findAll({
+      where: { clientId: user.id, destination: "to_client" },
+    });
+    res.json(pixsUser);
+  } catch (error) {
+    res.status(500).json({ message: "Error: " + error.message });
+  }
+});
+
+// gete send user pix
+router.get("/pix/send/:id", authenticateToken, async (req, res) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: "Client not found." });
+    }
+    const pixsUser = await Pix.findAll({
+      where: { clientId: user.id, destination: "to_enterprise" },
+    });
+    res.json(pixsUser);
+  } catch (error) {
+    res.status(500).json({ message: "Error: " + error.message });
+  }
+});
+
+
+module.exports = router;
