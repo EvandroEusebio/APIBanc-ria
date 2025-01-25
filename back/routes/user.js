@@ -50,7 +50,7 @@ router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ where: { cpf } });
     if (!user) {
-      return res.status(400).json({ message: "Client not found" });
+      return res.status(400).json({ message: "Invalid credentials" });
     }
 
     // Verify if password is valid
@@ -65,7 +65,7 @@ router.post("/login", async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    res.json({ token });
+    res.json({ user, token });
   } catch (error) {
     res.status(500).json({ message: "Login failed" });
   }
@@ -106,7 +106,6 @@ router.get("/pix/:id", authenticateToken, async (req, res) => {
   }
 });
 
-
 // get received user pix
 router.get("/pix/receive/:id", authenticateToken, async (req, res) => {
   try {
@@ -138,6 +137,5 @@ router.get("/pix/send/:id", authenticateToken, async (req, res) => {
     res.status(500).json({ message: "Error: " + error.message });
   }
 });
-
 
 module.exports = router;
