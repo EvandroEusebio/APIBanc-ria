@@ -113,7 +113,7 @@ export default function SignUp() {
             />
             <Button
               type="submit"
-              className="w-full bg-cerulean-blue-500 h-[55px] rounded-2xl hover:bg-cerulean-blue-600 shadow-none"
+              className="w-full bg-cerulean-blue-500 h-[55px] rounded-2xl hover:bg-cerulean-blue-600 shadow-none hover:shadow-md transition duration-300"
             >
               Registrar
             </Button>
@@ -122,7 +122,7 @@ export default function SignUp() {
                 Já tem um conta?{' '}
                 <Link
                   to={{
-                    pathname: '/',
+                    pathname: '/login',
                   }}
                 >
                   <span className="text-cerulean-blue-500">Login</span>
