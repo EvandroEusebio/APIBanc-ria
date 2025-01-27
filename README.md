@@ -58,7 +58,15 @@ Certifique-se de ter instalado:
    git clone https://github.com/EvandroEusebio/APIBanc-ria.git
    cd back
 2. Instale as dependencias
-```bash
-   $ pnpm i
+   ```bash
+   pnpm i
    ou
    npm install
+3. Configure o arquivo config/config.json
+```bash
+  "development":
+    "username": "NOME_DO_USUARIO_DO_BANCO",
+    "password": "SENHA_DO_BANCO",
+    "database": "NOME_DO_BANCO",
+    "host": "ENDEREÇO_DO_BANCO (127.0.0.1)",
+    "dialect": "mysql"
