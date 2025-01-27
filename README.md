@@ -130,6 +130,14 @@ npm start
 
 🧪 Como Usar
 
-- **Acesse o Frontend: http://localhost:8000{sua porta}.**
+- **Acesse o Frontend: http://localhost:5173.**
 - **Crie uma conta e faça login.**
 - **Gerencie suas transações PIX no painel.**
+
+📖 Rotas da API
+- **POST /users** Registra um novo usuário.
+- **POST /users/login** Realiza login.
+- **POST /users/pix** Envia um novo pix.
+- **POST /users/pix/{id}** pega os pixs do usuário.
+- **POST /users/pix/receive/{id}** pega os pixs recebidos do usuário.
+- **POST /users/pix/send/{id}** pega os pixs enviados do usuário.
