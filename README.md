@@ -55,6 +55,10 @@ Certifique-se de ter instalado:
 ### **Backend**
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-repo/backend.git
-   cd backend
+   git clone https://github.com/EvandroEusebio/APIBanc-ria.git
+   cd back
 2. Instale as dependencias
+```bash
+   $ pnpm i
+   ou
+   npm install
