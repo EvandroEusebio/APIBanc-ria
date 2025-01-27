@@ -68,8 +68,6 @@ Certifique-se de ter instalado:
 2. Instale as dependencias
 
 ```bash
-   pnpm i
-   ou
    npm install
 ```
 
@@ -94,4 +92,38 @@ npx sequelize-cli db:migrate
 
 ```bash
 npm start
+```
+
+### **Frontend**
+
+1. Clone o repositório:
+
+```bash
+   git clone https://github.com/EvandroEusebio/APIBanc-ria.git
+   cd front/Pix-front
+```
+
+2. Instale as dependencias
+
+```bash
+   pnpm i
+   ou
+   npm install
+```
+
+3. Acesse o arquivo src/service/axios.ts e configure:
+
+```bash
+   const axiosInstance = axios.create({
+  baseURL: "http://localhost:5000", // Insira sua url do servidor
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+```
+
+4. Inicie o projeto:
+
+```bash
+   pnpm run dev
 ```

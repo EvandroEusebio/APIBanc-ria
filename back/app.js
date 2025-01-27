@@ -17,5 +17,5 @@ app.use("/users", userRoutes);
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`servidor activo ${PORT}`);
+  console.log(`servidor activo porta ${PORT}`);
 });
