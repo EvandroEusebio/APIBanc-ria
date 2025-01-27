@@ -83,3 +83,9 @@ Certifique-se de ter instalado:
   "host": "ENDEREÇO_DO_SEU_BANCO (127.0.0.1)",
   "dialect": "mysql" }
 ```
+
+4. Execute as migrações do banco
+
+```bash
+npx sequelize-cli db:migrate
+```
