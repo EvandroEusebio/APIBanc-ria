@@ -64,9 +64,9 @@ Certifique-se de ter instalado:
    npm install
 3. Configure o arquivo config/config.json
 ```bash
-  "development":
+  "development":{
     "username": "NOME_DO_USUARIO_DO_BANCO",
     "password": "SENHA_DO_BANCO",
     "database": "NOME_DO_BANCO",
     "host": "ENDEREÇO_DO_BANCO (127.0.0.1)",
-    "dialect": "mysql"
+    "dialect": "mysql" }
