@@ -141,3 +141,6 @@ npm start
 - **POST /users/pix/{id}** pega os pixs do usuário.
 - **POST /users/pix/receive/{id}** pega os pixs recebidos do usuário.
 - **POST /users/pix/send/{id}** pega os pixs enviados do usuário.
+
+📝 Licença
+Este projeto está sob a licença MIT. Consulte o arquivo LICENSE para mais informações.
