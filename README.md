@@ -89,3 +89,9 @@ Certifique-se de ter instalado:
 ```bash
 npx sequelize-cli db:migrate
 ```
+
+5. Inicie o servidor
+
+```bash
+npm start
+```
