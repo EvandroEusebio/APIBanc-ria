@@ -13,7 +13,8 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { setCookie } from '@/utils/cookie';
 import { handleRegister } from '@/service/apiRoutes/client';
 
 // Definindo o esquema de validação com Zod
@@ -26,9 +27,7 @@ const schema = z.object({
 type Inputs = z.infer<typeof schema>;
 
 export default function SignUp() {
-  const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
   });
@@ -37,6 +36,9 @@ export default function SignUp() {
     await handleRegister(data)
       .then((response) => {
         console.log(response.data);
+        setCookie('uid', response.data.token);
+        setCookie('client', response.data.user);
+        navigate('/');
       })
       .catch((error) => {
         console.error('Erro de ao enviar: ', error);

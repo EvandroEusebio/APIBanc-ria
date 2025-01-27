@@ -17,6 +17,7 @@ import { PixData } from '@/types/pix_types';
 import { getUserPix } from '@/service/apiRoutes/client';
 import { getCookie } from '@/utils/cookie';
 import { Badge } from '@/components/ui/badge';
+import { formatDate, atualDate } from '@/utils/formatDate';
 
 
 export default function Home() {
@@ -44,7 +45,6 @@ export default function Home() {
       <div className="p-6 max-w-[1200px] mx-auto">
         {/* Welcome Section */}
         <div className="flex flex-col-reverse sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-          {/* Saudações e mensagem */}
           <div>
             <h1 className="text-2xl font-semibold mb-1">Bom Dia, Evandro!</h1>
             <p className="text-sm text-muted-foreground">
@@ -53,12 +53,10 @@ export default function Home() {
           </div>
           {/* Informações do lado direito */}
           <div className="flex flex-row items-center justify-between gap-4 w-full  sm:w-auto ">
-            {/* Data */}
             <div className="flex items-center gap-2 bg-cerulean-blue-100 text-cerulean-blue-900 font-semibold py-2.5 px-6 rounded-2xl">
               <GoClock className="w-5 h-5" />
-              <p className="text-sm">November 21, 2023</p>
+              <p className="text-sm">{atualDate()}</p>
             </div>
-            {/* Avatar e informações do usuário */}
             <div>
               <UserDropMenu />
             </div>
@@ -127,7 +125,7 @@ export default function Home() {
                       )}
                     </TableCell>
                     <TableCell>{item.amount}</TableCell>
-                    <TableCell>${item.createdAt}</TableCell>
+                    <TableCell>{formatDate(item.createdAt)}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
