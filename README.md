@@ -7,11 +7,13 @@ Gerencie suas transações PIX de forma simples e eficiente com este sistema. Es
 ## 🚀 **Funcionalidades**
 
 ### **Frontend**
+
 - Interface limpa e responsiva.
 - Visualização de transações PIX recebidas e enviadas.
 - Formulário de registro e login.
 
 ### **Backend**
+
 - API RESTful para gerenciamento de transações PIX.
 - Autenticação de usuários (JWT).
 - Suporte a operações de criação, leitura (CRUD).
@@ -21,6 +23,7 @@ Gerencie suas transações PIX de forma simples e eficiente com este sistema. Es
 ## 🛠️ **Tecnologias Utilizadas**
 
 ### **Frontend**
+
 - **React** (com Vite para otimização)
 - **Tailwind CSS** para estilização.
 - **Shadcn** para componentes.
@@ -32,6 +35,7 @@ Gerencie suas transações PIX de forma simples e eficiente com este sistema. Es
 - **Axios** para consumo da API.
 
 ### **Backend**
+
 - **Node.js** com **Express**.
 - **MYSQL** para banco de dados.
 - **JWT** para autenticação.
@@ -42,10 +46,10 @@ Gerencie suas transações PIX de forma simples e eficiente com este sistema. Es
 
 ### **Frontend**
 
-
 ## ⚙️ **Pré-requisitos**
 
 Certifique-se de ter instalado:
+
 - **Node.js** >=22.x
 - **PostgreSQL** >= 8.x
 - **PNPM** ou **NPM**.
@@ -53,20 +57,29 @@ Certifique-se de ter instalado:
 ## 🛠️ **Como Configurar o Projeto**
 
 ### **Backend**
+
 1. Clone o repositório:
-   ```bash
+
+```bash
    git clone https://github.com/EvandroEusebio/APIBanc-ria.git
    cd back
+```
+
 2. Instale as dependencias
-   ```bash
+
+```bash
    pnpm i
    ou
    npm install
+```
+
 3. Configure o arquivo config/config.json
-  ```bash
-  "development":{
-    "username": "NOME_DO_USUARIO_DO_SEU_BANCO (root)",
-    "password": "SENHA_DO_SEU_BANCO (null)",
-    "database": "NOME_DO_SEU_BANCO",
-    "host": "ENDEREÇO_DO_SEU_BANCO (127.0.0.1)",
-    "dialect": "mysql" }
+
+```bash
+"development":{
+  "username": "NOME_DO_USUARIO_DO_SEU_BANCO (root)",
+  "password": "SENHA_DO_SEU_BANCO (null)",
+  "database": "NOME_DO_SEU_BANCO",
+  "host": "ENDEREÇO_DO_SEU_BANCO (127.0.0.1)",
+  "dialect": "mysql" }
+```
