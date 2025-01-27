@@ -63,10 +63,10 @@ Certifique-se de ter instalado:
    ou
    npm install
 3. Configure o arquivo config/config.json
-```bash
+  ```bash
   "development":{
-    "username": "NOME_DO_USUARIO_DO_BANCO",
-    "password": "SENHA_DO_BANCO",
-    "database": "NOME_DO_BANCO",
-    "host": "ENDEREÇO_DO_BANCO (127.0.0.1)",
+    "username": "NOME_DO_USUARIO_DO_SEU_BANCO (root)",
+    "password": "SENHA_DO_SEU_BANCO (null)",
+    "database": "NOME_DO_SEU_BANCO",
+    "host": "ENDEREÇO_DO_SEU_BANCO (127.0.0.1)",
     "dialect": "mysql" }
