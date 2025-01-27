@@ -29,7 +29,7 @@ router.post("/pix", async (req, res) => {
     const pix = await Pix.create(req.body);
     return res.json(pix);
   } catch (error) {
-    console.log(error);
+    console.log("erorororor: " + error);
     res.status(500).json({ message: "Failed to create pix." });
   }
 });
@@ -38,10 +38,23 @@ router.post("/pix", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const user = await User.create(req.body);
-    res.json(user);
+    // Create an token JWT
+    const token = jwt.sign(
+      { userId: user.id, username: user.name },
+      JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+    res.json({ user, token });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Failed to create Client." });
+    if (error.name === "SequelizeValidationError") {
+      error.errors.forEach((err) => {
+        res.status(401).json({ message: err.message });
+      });
+    } else {
+      console.error("Server Error:", error);
+      res.status(500).json({ message: "Failed to create Client try later!" });
+    }
   }
 });
 
@@ -104,8 +117,8 @@ router.get("/pix/:id", authenticateToken, async (req, res) => {
         },
       ],
       order: [
-        ['createdAt', 'DESC'] // or 'DESC'
-      ]
+        ["createdAt", "DESC"], // or 'DESC'
+      ],
     });
 
     if (pixsUser.length === 0) {
@@ -114,28 +127,28 @@ router.get("/pix/:id", authenticateToken, async (req, res) => {
 
     //get Total Received pix
     const totalPix = await Pix.count({
-      where:{
+      where: {
         clientId: user.id,
-      }
-    })
+      },
+    });
 
     //get Total Received pix
     const totalReceivedPix = await Pix.count({
-      where:{
+      where: {
         clientId: user.id,
-        destination: "to_client"
-      }
-    })
+        destination: "to_client",
+      },
+    });
 
     //get Total Received pix
     const totalSendPix = await Pix.count({
-      where:{
+      where: {
         clientId: user.id,
-        destination: "to_enterprise"
-      }
-    })
+        destination: "to_enterprise",
+      },
+    });
 
-    res.json({pixsUser, totalReceivedPix, totalSendPix, totalPix});
+    res.json({ pixsUser, totalReceivedPix, totalSendPix, totalPix });
   } catch (error) {
     res.status(500).json({ message: "Error: " + error.message });
   }
