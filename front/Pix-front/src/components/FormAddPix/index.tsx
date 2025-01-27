@@ -5,17 +5,17 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
+  FormMessage
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useToast } from '@/hooks/use-toast';
 import { handleCreatePix } from '@/service/apiRoutes/client';
 import { getCookie } from '@/utils/cookie';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { Textarea } from '../ui/textarea';
-import { useNavigate } from 'react-router-dom';
-import { useToast } from '@/hooks/use-toast';
 
 const schema = z.object({
   pix_key: z.string({
@@ -77,7 +77,7 @@ export default function FormAddPix() {
               <FormLabel>Chave Pix</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Insira a chave Pix"
+                  placeholder="Insira a nossa chave PIX (123)"
                   autoComplete="off"
                   className="h-[55px] rounded-2xl bg-[rgb(255,255,255)]  focus:outline-none focus:border-cerulean-blue-400 shadow-none focus:shadow-lg focus:shadow-cerulean-blue-200"
                   {...field}
