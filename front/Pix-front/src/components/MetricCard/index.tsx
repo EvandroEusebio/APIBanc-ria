@@ -23,7 +23,7 @@ export default function MetricCard({
         </div>
         <div>
           <div className="flex items-center text-muted-foreground text-sm">
-            <p>Compare to yesterday</p>
+            <p>Métricas de hoje</p>
           </div>
         </div>
       </div>

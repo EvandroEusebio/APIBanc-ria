@@ -19,7 +19,7 @@ import { IoChevronDownOutline } from 'react-icons/io5';
 import { deleteCookie } from '@/utils/cookie';
 import { useNavigate } from 'react-router-dom';
 
-export default function UserDropMenu() {
+export default function UserDropMenu({userName, cpf}:{ userName: string, cpf:string}) {
   const navigate = useNavigate();
 
   function logout() {
@@ -46,8 +46,8 @@ export default function UserDropMenu() {
 
           {/* Texto que desaparece em telas pequenas */}
           <div className="hidden sm:block">
-            <p className="text-sm font-medium">Evandro Eusébio</p>
-            <p className="text-xs text-muted-foreground">1234</p>
+            <p className="text-sm font-medium">{userName}</p>
+            <p className="text-xs text-muted-foreground">{cpf}</p>
           </div>
 
           {/* Ícone */}

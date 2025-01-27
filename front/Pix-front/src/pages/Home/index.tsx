@@ -26,6 +26,8 @@ export default function Home() {
   const [totalSendPix, setTotalSendPix] = useState(0);
   const [totalPix, setTotalPix] = useState(0);
   let userId = getCookie('client').id;
+  let userName = getCookie('client').name;
+  let userCpf = getCookie('client').cpf;
 
   useEffect(() => {
     getUserPix(userId)
@@ -45,7 +47,7 @@ export default function Home() {
       <div className="p-6 max-w-[1200px] mx-auto">
         <div className="flex flex-col-reverse sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
           <div>
-            <h1 className="text-2xl font-semibold mb-1">Bom Dia, Evandro!</h1>
+            <h1 className="text-2xl font-semibold mb-1">Ola, {userName}!</h1>
             <p className="text-sm text-muted-foreground">
               Comece o seu dia gerenciando os seus PIXs
             </p>
@@ -56,7 +58,7 @@ export default function Home() {
               <p className="text-sm">{atualDate()}</p>
             </div>
             <div>
-              <UserDropMenu />
+              <UserDropMenu cpf={userCpf} userName={userName}/>
             </div>
           </div>
         </div>
