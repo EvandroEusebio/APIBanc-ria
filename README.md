@@ -40,12 +40,6 @@ Gerencie suas transações PIX de forma simples e eficiente com este sistema. Es
 - **MYSQL** para banco de dados.
 - **JWT** para autenticação.
 
----
-
-## 📂 **Estrutura do Projeto**
-
-### **Frontend**
-
 ## ⚙️ **Pré-requisitos**
 
 Certifique-se de ter instalado:
@@ -135,6 +129,7 @@ npm start
 - **Gerencie suas transações PIX no painel.**
 
 📖 Rotas da API
+
 - **POST /users** Registra um novo usuário.
 - **POST /users/login** Realiza login.
 - **POST /users/pix** Envia um novo pix.
@@ -144,3 +139,9 @@ npm start
 
 📝 Licença
 Este projeto está sob a licença MIT. Consulte o arquivo LICENSE para mais informações.
+
+📧 Contato
+
+- **Email: ** eusebioevandro01@gmail.com
+- **GitHub: ** https://github.com/EvandroEusebio
+- **Linkedin: ** https://www.linkedin.com/in/evandro-eus%C3%A9bio-121a5a26a/
