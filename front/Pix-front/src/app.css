@@ -2,17 +2,26 @@
 
 /* Reset básico de CSS */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Estilos globais */
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
-    color: #333;
-    height: 100vh;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+
+/* Garantir que html e body ocupem toda a altura da tela */
+html, body {
+  height: 100%;
+  min-height: 100vh; /* Garantir que a altura seja pelo menos 100% da altura da janela */
   
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  display: flex; /* Flexbox para facilitar o controle de layout */
+  flex-direction: column; /* Para garantir que os elementos ocupem todo o espaço */
+}
+
+#root {
+  flex: 1; /* Garantir que o root ocupe todo o espaço disponível */
+}

@@ -1,7 +1,3 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { z } from 'zod';
 import gif from '@/assets/gifs/Telecommuting.gif';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,9 +9,13 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Link, useNavigate } from 'react-router-dom';
-import { setCookie } from '@/utils/cookie';
+import { useToast } from '@/hooks/use-toast';
 import { handleRegister } from '@/service/apiRoutes/client';
+import { setCookie } from '@/utils/cookie';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import { z } from 'zod';
 
 // Definindo o esquema de validação com Zod
 const schema = z.object({
@@ -31,6 +31,7 @@ export default function SignUp() {
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
   });
+  const { toast } = useToast();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     await handleRegister(data)
@@ -38,17 +39,26 @@ export default function SignUp() {
         console.log(response.data);
         setCookie('uid', response.data.token);
         setCookie('client', response.data.user);
+        toast({
+          title: 'Autendicado com sucesso',
+          description: `Cliente: ${response.data.user.name}\nCPF: ${response.data.user.cpf}`,
+        });
         navigate('/');
       })
       .catch((error) => {
         console.error('Erro de ao enviar: ', error);
+        toast({
+          variant: 'destructive',
+          title: 'Não foi possível Autenticar',
+          description: 'Mensagem: ' + error.response.data.message,
+        });
       });
   };
 
   return (
-    <div className="flex h-screen flex-col lg:flex-row">
+    <div className="flex min-h-screen bg-[#ffff] flex-col lg:flex-row items-center justify-center">
       {/* Formulário */}
-      <div className="w-full lg:w-1/2 p-4 flex flex-col justify-center items-center h-full">
+      <div className="w-full lg:w-1/2 p-4 flex flex-col justify-center items-center">
         <div className="mb-8 text-center space-y-2">
           <h1 className="text-title-h1 font-semibold">Faça Parte</h1>
           <h3 className="text-title-h6">Venha e gerencie os seus pixs</h3>
@@ -141,7 +151,7 @@ export default function SignUp() {
           src={gif}
           alt="ss"
           className="h-full 
-           object-cover rounded-lg"
+       object-cover rounded-lg"
         />
       </div>
     </div>

@@ -15,7 +15,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Textarea } from '../ui/textarea';
 import { useNavigate } from 'react-router-dom';
-
+import { useToast } from '@/hooks/use-toast';
 
 const schema = z.object({
   pix_key: z.string({
@@ -33,7 +33,8 @@ export default function FormAddPix() {
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
   });
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     let realData = {
@@ -47,10 +48,19 @@ export default function FormAddPix() {
     handleCreatePix(realData)
       .then((resp) => {
         console.log(resp.data);
-        navigate(0)
+        toast({
+          title: 'Enviado com sucesso!',
+          description: "O seu PIX foi enviado com sucesso"
+        });
+        navigate(0);
       })
       .catch((err) => {
         console.error('Erro ao criar o Pix', err.response.data.message);
+        toast({
+          variant: 'destructive',
+          title: 'Não foi possível Enviar o pix',
+          description: "Mensagem: " + err.response.data.message
+        });
       });
   };
   return (
