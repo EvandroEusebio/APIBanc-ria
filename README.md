@@ -1,3 +1,5 @@
+![Interface do Sistema](./img/site.png)
+
 # 📌 Gerenciador de PIX
 
 Gerencie suas transações PIX de forma simples e eficiente com este sistema. Este projeto é composto por um frontend desenvolvido em React e um backend baseado em Node.js.
