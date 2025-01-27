@@ -19,15 +19,19 @@ const getReceivedPix = (id: number) => {
   return axiosInstance.get(`/users/pix/receive/${id}`);
 };
 
+const getUserPix = (id: number) => {
+  return axiosInstance.get(`/users/pix/${id}`);
+};
+
 const getSendPix = (id: number) => {
   return axiosInstance.get(`/users/pix/send/${id}`);
 };
 
-const handleCreatePix = (data: PixData) => {
-  return axiosInstance.post("/users/pix");
+const handleCreatePix = (data: any) => {
+  return axiosInstance.post("/users/pix", data);
 };
 
 
 
 
-export { handleLogin, handleRegister, handleLogout, handleCreatePix, getReceivedPix, getSendPix };
+export { handleLogin, handleRegister, handleLogout, handleCreatePix, getReceivedPix, getSendPix, getUserPix };

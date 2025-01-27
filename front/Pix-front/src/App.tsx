@@ -1,17 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Route, Routes } from 'react-router-dom';
+import Home from './pages/Home/index.tsx';
+import SignIn from './pages/SignIn/index.tsx';
+import SignUp from './pages/SignUp/index.tsx';
+import { ProtectedRoute } from './routes/ProtectRoute/index.tsx';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        
-      </div>
-    </>
-  )
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="/login" element={<SignIn />} />
+      <Route path="/signup" element={<SignUp />} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;

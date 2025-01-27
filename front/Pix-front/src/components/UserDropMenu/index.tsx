@@ -16,8 +16,17 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import { IoChevronDownOutline } from 'react-icons/io5';
+import { deleteCookie } from '@/utils/cookie';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserDropMenu() {
+  const navigate = useNavigate();
+
+  function logout() {
+    deleteCookie('uid');
+    deleteCookie('client');
+    navigate(0);
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="hover:cursor-pointer">
@@ -57,7 +66,7 @@ export default function UserDropMenu() {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-destructive hover:cursor-pointer">
+        <DropdownMenuItem className="text-destructive hover:cursor-pointer" onClick={logout}>
           Sair
           <DropdownMenuShortcut className="opacity-100">
             <CiLogout className="w-5 h-5" color="" />

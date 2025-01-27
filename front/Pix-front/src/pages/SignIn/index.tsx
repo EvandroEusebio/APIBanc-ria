@@ -53,7 +53,7 @@ export default function SignIn() {
   };
 
   return (
-    <div className="flex h-full vh flex-col lg:flex-row">
+    <div className="flex h-svh flex-col lg:flex-row">
       {/* Formulário */}
       <div className="w-full lg:w-1/2 p-4 flex flex-col justify-center items-center h-full">
         <div className="mb-8 space-y-2 text-center">

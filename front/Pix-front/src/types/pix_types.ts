@@ -5,9 +5,14 @@ export enum PixDestination {
 
 
 export interface PixData {
-  clientId: string;
+  id: number;
+  clientId: number
+  clients: {
+    name: string
+  };
   pix_key: string;
   destination: PixDestination;
-  description: string
+  description: string;
   amount: number;
+  createdAt: string
 }

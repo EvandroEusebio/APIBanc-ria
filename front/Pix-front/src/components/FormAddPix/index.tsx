@@ -8,19 +8,23 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { handleCreatePix } from '@/service/apiRoutes/client';
+import { getCookie } from '@/utils/cookie';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Textarea } from '../ui/textarea';
+import { useNavigate } from 'react-router-dom';
+
 
 const schema = z.object({
   pix_key: z.string({
     required_error: 'Insira a chave pix',
   }),
-  description: z.string().max(160, {
-    message: 'Bio must not be longer than 30 characters.',
+  description: z.string().max(160),
+  amount: z.string({
+    required_error: 'Insira o valor que deseja enviar',
   }),
-  amount: z.number(),
 });
 
 type Inputs = z.infer<typeof schema>;
@@ -29,9 +33,25 @@ export default function FormAddPix() {
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
   });
+  const navigate = useNavigate()
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log(data);
+    let realData = {
+      clientId: getCookie('client').id,
+      pix_key: data.pix_key,
+      destination: 'to_enterprise',
+      description: data.description,
+      amount: Number(data.amount),
+    };
+
+    handleCreatePix(realData)
+      .then((resp) => {
+        console.log(resp.data);
+        navigate(0)
+      })
+      .catch((err) => {
+        console.error('Erro ao criar o Pix', err.response.data.message);
+      });
   };
   return (
     <Form {...form}>
@@ -66,6 +86,7 @@ export default function FormAddPix() {
               <FormControl>
                 <Input
                   autoComplete="off"
+                  type="number"
                   className="h-[55px] rounded-2xl  bg-[rgb(255,255,255)]  focus:outline-none focus:border-cerulean-blue-400 shadow-none focus:shadow-lg focus:shadow-cerulean-blue-200"
                   placeholder="Insira valor"
                   {...field}

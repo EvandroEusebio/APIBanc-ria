@@ -33,7 +33,6 @@ export default function AddPixFormModal() {
 
     window.addEventListener('resize', handleResize);
 
-    // Limpeza do evento
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -62,10 +61,10 @@ export default function AddPixFormModal() {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <button className="flex bg-cerulean-blue-500 items-center py-4 px-4  gap-2 rounded-full text-cerulean-blue-50 hover:bg-cerulean-blue-600  font-semibold sm:py-2.5 sm:px-6  sm:rounded-2xl hover:shadow-md transition duration-300">
+        <Button className="flex bg-cerulean-blue-500 items-center py-4 px-4  gap-2 rounded-full text-cerulean-blue-50 hover:bg-cerulean-blue-600  font-semibold sm:py-2.5 sm:px-6  sm:rounded-2xl hover:shadow-md transition duration-300">
           <BsSendArrowUp className="w-5 h-5" />
           <p className="text-sm  hidden sm:block">Enviar Pix</p>
-        </button>
+        </Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
