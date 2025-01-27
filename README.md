@@ -127,3 +127,9 @@ npm start
 ```bash
    pnpm run dev
 ```
+
+🧪 Como Usar
+
+- **Acesse o Frontend: http://localhost:8000{sua porta}.**
+- **Crie uma conta e faça login.**
+- **Gerencie suas transações PIX no painel.**
