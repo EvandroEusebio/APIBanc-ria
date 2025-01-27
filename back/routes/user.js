@@ -96,11 +96,46 @@ router.get("/pix/:id", authenticateToken, async (req, res) => {
 
     const pixsUser = await Pix.findAll({
       where: { clientId: user.id },
+      include: [
+        {
+          model: User,
+          as: "clients",
+          attributes: ["name"],
+        },
+      ],
+      order: [
+        ['createdAt', 'DESC'] // or 'DESC'
+      ]
     });
+
     if (pixsUser.length === 0) {
       return res.status(404).json({ message: "Client Pix not found." });
     }
-    res.json(pixsUser);
+
+    //get Total Received pix
+    const totalPix = await Pix.count({
+      where:{
+        clientId: user.id,
+      }
+    })
+
+    //get Total Received pix
+    const totalReceivedPix = await Pix.count({
+      where:{
+        clientId: user.id,
+        destination: "to_client"
+      }
+    })
+
+    //get Total Received pix
+    const totalSendPix = await Pix.count({
+      where:{
+        clientId: user.id,
+        destination: "to_enterprise"
+      }
+    })
+
+    res.json({pixsUser, totalReceivedPix, totalSendPix, totalPix});
   } catch (error) {
     res.status(500).json({ message: "Error: " + error.message });
   }
