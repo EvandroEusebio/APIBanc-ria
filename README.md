@@ -16,7 +16,7 @@ Gerencie suas transações PIX de forma simples e eficiente com este sistema. Es
 
 - API RESTful para gerenciamento de transações PIX.
 - Autenticação de usuários (JWT).
-- Suporte a operações de criação, leitura (CRUD).
+- Suporte a operações de criação, leitura.
 
 ---
 
@@ -138,6 +138,7 @@ npm start
 - **POST /users/pix/send/{id}** pega os pixs enviados do usuário.
 
 📝 Licença
+
 Este projeto está sob a licença MIT. Consulte o arquivo LICENSE para mais informações.
 
 📧 Contato
